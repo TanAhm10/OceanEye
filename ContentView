@@ -6,6 +6,34 @@
 //
 
 
+import SwiftUI
+
+struct ContentView: View {
+    var body: some View {
+        ZStack {
+            LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.4), Color.blue.opacity(0.6)]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                .edgesIgnoringSafeArea(.all)
+            VStack {
+                ZStack {
+                    Color.white.opacity(0.35)
+                        .frame(width: 350, height: 300)
+                        .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
+                        .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: 10)
+
+
+                    Rectangle()
+                        .stroke(Color.white, lineWidth: 0)
+                        .frame(width: 250, height: 200)
+                }
+                Spacer()
+            }
+        }
+    }
+}
+
+Message BOGA FC
+
+
 
 #Preview {
     ContentView()
