@@ -8,30 +8,115 @@
 
 import SwiftUI
 
+struct ImagePicker: UIViewControllerRepresentable {
+    @Binding var selectedImage: UIImage?
+
+    func makeUIViewController(context: Context) -> UIImagePickerController {
+        let picker = UIImagePickerController()
+        picker.delegate = context.coordinator
+        picker.sourceType = .photoLibrary
+        return picker
+    }
+
+    func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {}
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+
+    class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+        var parent: ImagePicker
+
+        init(_ parent: ImagePicker) {
+            self.parent = parent
+        }
+
+        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+            if let image = info[.originalImage] as? UIImage {
+                parent.selectedImage = image
+            }
+            picker.dismiss(animated: true)
+        }
+    }
+}
+
 struct ContentView: View {
+    @State private var isImagePickerPresented = false
+    @State private var originalImage: UIImage?
+    
     var body: some View {
         ZStack {
             LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.4), Color.blue.opacity(0.6)]), startPoint: .topLeading, endPoint: .bottomTrailing)
                 .edgesIgnoringSafeArea(.all)
+            
             VStack {
                 ZStack {
                     Color.white.opacity(0.35)
                         .frame(width: 350, height: 300)
                         .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
                         .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: 10)
-
-
+                    
                     Rectangle()
                         .stroke(Color.white, lineWidth: 0)
                         .frame(width: 250, height: 200)
+                    
+                    if let originalImage = originalImage {
+                        Image(uiImage: originalImage)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 250, height: 200)
+                            .clipped()
+                    } else {
+                        Text("Uploaded Picture Preview")
+                            .foregroundColor(.black)
+                            .font(.subheadline)
+                    }
                 }
-                Spacer()
+                
+                Spacer().frame(height: 40)
+                
+                Button(action: {
+                    self.isImagePickerPresented = true
+                }) {
+                    Text("Upload Picture")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(Color.green)
+                        .cornerRadius(10)
+                        .shadow(color: .gray, radius: 5, x: 0, y: 3)
+                }
+                .sheet(isPresented: $isImagePickerPresented) {
+                    ImagePicker(selectedImage: $originalImage)
+                }
+                
+                Spacer().frame(height: 50)
+                
+                Button(action: {
+                    if let originalImage = originalImage {
+                        print("hello")
+                    } else {
+                        print("world")
+                    }
+                }) {
+                    Text("Identify Fish 🔍")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(Color.green)
+                        .cornerRadius(10)
+                        .shadow(color: .gray, radius: 5, x: 0, y: 3)
+                }
+                .disabled(originalImage == nil)
+                
             }
         }
     }
 }
 
-
-#Preview {
-    ContentView()
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
 }
+
