@@ -31,9 +31,6 @@ struct ContentView: View {
     }
 }
 
-Message BOGA FC
-
-
 
 #Preview {
     ContentView()
