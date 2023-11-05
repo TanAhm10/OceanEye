@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  MainView.swift
 //  OceanEye
 //
 //  Created by Tanvir Ahmed, Nayed Ali, MD Uddin  on 11/4/23.
@@ -14,7 +14,7 @@ import UIKit
 import PhotosUI
 
 
-struct ContentView: View {
+struct MainView: View {
     @State private var isImagePickerPresented = false
     @State private var originalImage: UIImage?
     @State private var matchingFish: Fish?
@@ -38,7 +38,7 @@ struct ContentView: View {
 
 
     func fetchFirebaseData(imageHash: String) {
-        let firebaseURL = "https://oceaneye-1758-default-rtdb.firebaseio.com/.json"
+        let firebaseURL = "https://oceaneye-17058-default-rtdb.firebaseio.com/.json"
 
         guard let url = URL(string: firebaseURL) else {
             print("Invalid Firebase URL")
@@ -211,7 +211,7 @@ struct DetailsPlaceholderView: View {
     var body: some View {
         Rectangle()
             .fill(Color.blue)
-            .frame(width: 350, height: 200)
+            .frame(width: 360, height: 200)
             .cornerRadius(10)
             .padding(.top, 20)
             .overlay(
@@ -259,9 +259,10 @@ struct ImagePicker: UIViewControllerRepresentable {
     }
 }
 
-
-struct ContentView_Previews: PreviewProvider {
+struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        MainView()
     }
 }
+
+
