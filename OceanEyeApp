@@ -11,7 +11,7 @@ import SwiftUI
 struct OceanEyeApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainView()
         }
     }
 }
