@@ -38,7 +38,7 @@ struct ContentView: View {
 
 
     func fetchFirebaseData(imageHash: String) {
-        let firebaseURL = "https://oceaneye-17058-default-rtdb.firebaseio.com/.json"
+        let firebaseURL = "https://oceaneye-1758-default-rtdb.firebaseio.com/.json"
 
         guard let url = URL(string: firebaseURL) else {
             print("Invalid Firebase URL")
