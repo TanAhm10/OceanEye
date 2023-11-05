@@ -88,9 +88,6 @@ struct ContentView: View {
 }
 
 
-
-
-
 struct ImagePicker: UIViewControllerRepresentable {
     @Binding var selectedImage: UIImage?
 
@@ -122,13 +119,6 @@ struct ImagePicker: UIViewControllerRepresentable {
         }
     }
 }
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
-
 
 
 
