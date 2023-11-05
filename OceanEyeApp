@@ -1,0 +1,17 @@
+//
+//  OceanEyeApp.swift
+//  OceanEye
+//
+//  Created by Tanvir Ahmed, Nayed Ali, MD Uddin on 11/4/23.
+//
+
+import SwiftUI
+
+@main
+struct OceanEyeApp: App {
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+    }
+}
